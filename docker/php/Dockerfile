@@ -1,6 +1,8 @@
 FROM php:8.2-fpm
 
-#MyySQL接続用のPDO拡張を有効化
-RUN docker-php-ext-install pdo pdo_mysql
+# 必要な拡張を追加
+RUN apt-get update && apt-get install -y \
+    zip unzip curl libpng-dev libonig-dev libxml2-dev \
+    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
 
 WORKDIR /var/www/html
